@@ -5,7 +5,6 @@ import { conexao } from "../util/conexao";
 export class LivroDao{
 
     public async salvar(livroProps: LivroProps): Promise<void> {  //ele pega so as propriedades do LivroProps
-       
         const sql = 'INSERT INTO livro (id, titulo, autor, editora, ano) VALUES (?, ?, ?, ?, ?)' // sql é a linguagem de consulta do banco de dados, o ? é um placeholder que será substituído pelos valores do livro
         const values = [livroProps.id, livroProps.titulo, livroProps.autor, livroProps.editora, livroProps.ano] // valores que serão inseridos no banco de dados, cada ? é um valor desse array 
         await conexao.query(sql, values) // executa a query no banco de dados
@@ -16,9 +15,8 @@ export class LivroDao{
         const [result] = await conexao.query<LivroProps[] & RowDataPacket[]>('SELECT * FROM livro') //essa promesa tem como dado os livros
     
         const livros: Livro[] = result.map((linha) => {
-        const { id, titulo, autor, editora, ano, is_emprestimo} = linha;
-        return Livro.build({ id, titulo, autor, editora, ano, is_emprestimo });
-    });
+            return Livro.build(linha);
+        });
     return livros
     }
 
