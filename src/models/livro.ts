@@ -29,4 +29,31 @@ export class Livro {
         public static build(livroProps: LivroProps): Livro {  //livro precisa existirpra motrar isso
             return new Livro(livroProps)
         }
+
+        //ncapsulamento para chamar o objeto privado, ele sempre sera esse valor somente chamando esses get
+        public getprops(){
+            return this.props
+        }
+
+        // get id(): string{
+        //     return this.props.id
+        // }
+
+        // get titulo(): string{
+        //     return this.props.titulo
+        // }
+
+        // get autor(): string{
+        //     return this.props.autor
+        // }
+
+        // get editora(): string {
+        //     return this.props.editora
+        // }
+
+        // get ano(): number {
+        //     return this.props.ano
+        // }
+
+        
 }
